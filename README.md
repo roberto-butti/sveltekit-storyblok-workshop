@@ -120,3 +120,9 @@ Add `app.css` file in `src/` directory and set TailwindCSS directive:
 @tailwind components;
 @tailwind utilities;
 ```
+
+## Installing DaisyUI
+
+```shell
+ npm i -D daisyui
+```
