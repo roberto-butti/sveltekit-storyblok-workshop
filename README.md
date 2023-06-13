@@ -1,38 +1,18 @@
-# create-svelte
+# Sveltekit Storyblok Workshop
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is the repository for tracking all the processes for creating a sample SvelteKit application with Stroyblok.
+The GitHub repository is here: [sveltekit-storyblok-workshop](https://github.com/roberto-butti/sveltekit-storyblok-workshop)
 
-## Creating a project
+## Install SvelteKit
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
+```shell
+# Installing SveteKit base project
+npm create svelte@latest sveltekit-storyblok-workshop
+# Installing package in the project directory
+cd sveltekit-storyblok-workshop
+npm install
+# Adding local Git
+git init && git add -A && git commit -m "Initial commit"
+# Running the local web server and open the browser
 npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
