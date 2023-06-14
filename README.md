@@ -111,6 +111,8 @@ npx tailwindcss init -p
 
 In the `svelte.config.js` make sure that you are loading the `vitePreprocess()` as `preprocess`.
 
+> Vite Preprocess is included in the _sveltejs/vite-plugin-svelte_. You don't have to include it in your `package.json` file, just because the Vite Plugin Svelte is a dependency of _sveltejs/kit_. Or, instead of using the Vite Preprocess you can install the [svelte preprocess](https://github.com/sveltejs/svelte-preprocess). Svelte Preprocess provides extra functionalities not available with Vite preprocessors, such as template tags, external files, and global styles.
+
 In the `tailwind.config.js` make sure that you are setting `./src/**/*.{html,js,svelte,ts}` as `content` .
 
 Add `app.css` file in `src/` directory and set TailwindCSS directive:
@@ -125,4 +127,10 @@ Add `app.css` file in `src/` directory and set TailwindCSS directive:
 
 ```shell
  npm i -D daisyui
+```
+
+For loading DaisyUI, in the `tailwind.config.js` require the DaisyUI plugin in the `plugins` section:
+
+```js
+plugins: [require('daisyui')];
 ```
