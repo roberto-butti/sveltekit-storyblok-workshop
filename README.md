@@ -227,7 +227,7 @@ Then in the templating section, you can access that data object (to `data.story`
 
 > See `src/routes/+page.svelte` for more info.
 
-# Creating the components
+## Creating the components
 
 Because the StoryblokComponent loads the Stroyblok Component, you must create the svelte components for each component used in the page.
 
@@ -276,3 +276,57 @@ for importing the `useStroyblokBridge` :
 ```js
 import { useStoryblokBridge, StoryblokComponent } from '@storyblok/svelte';
 ```
+
+## Creating a new pages
+
+For allowing the creation of pages that reply to /[slug], for example like `/about` , `/page` , `/myproject` etc., you can create a `[slug]` folder in the `src/routes` directory. In the `[slug]` directory, you can create the `+page.js` file, similar to the previous one, but in this case, instead of retrieving the Storyblok story with the hardcoded value `home`, you can use the parameter `slug`.
+
+So, create src/routes/[slug] folder. In the folder create the +page.js file:
+
+```js
+import { useStoryblokApi } from '@storyblok/svelte';
+import { useStoryblok } from '$lib/sblib';
+
+/** @type {import('./$types').PageLoad} */
+export async function load({ params }) {
+	const slug = params.slug;
+
+	await useStoryblok();
+
+	let storyblokApi = await useStoryblokApi();
+
+	const dataStory = await storyblokApi.get('cdn/stories/' + slug, {
+		version: 'draft'
+	});
+
+	return {
+		story: dataStory.data.story
+	};
+}
+```
+
+Then create `+page.svelte` file:
+
+```js
+<script>
+	import { onMount } from 'svelte';
+	import { useStoryblokBridge, StoryblokComponent } from '@storyblok/svelte';
+	import '../../app.css';
+	import Header from '$lib/components/Header.svelte';
+	export let data;
+
+	onMount(() => {
+		if (data.story) {
+			useStoryblokBridge(data.story.id, (newStory) => (data.story = newStory));
+		}
+	});
+</script>
+
+<div>
+	<Header />
+	<StoryblokComponent blok={data.story.content} />
+</div>
+
+```
+
+In Storyblok create the story `/about`.
