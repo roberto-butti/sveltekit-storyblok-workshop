@@ -154,22 +154,22 @@ import { PUBLIC_ACCESS_TOKEN } from '$env/static/public';
 import { PUBLIC_REGION } from '$env/static/public';
 
 export async function useStoryblok(accessToken = '') {
-    // 002 setting the access token (from environment variable)
+	// 002 setting the access token (from environment variable)
 	accessToken = accessToken === '' ? PUBLIC_ACCESS_TOKEN : accessToken;
-    // 003 call storyblok init
+	// 003 call storyblok init
 	await storyblokInit({
-        // 004 using the access token
+		// 004 using the access token
 		accessToken: accessToken,
-        // 005 using the apiPlugin (for connecting with Stroyblok API)
+		// 005 using the apiPlugin (for connecting with Stroyblok API)
 		use: [apiPlugin],
-        // 006 listing the needed components
+		// 006 listing the needed components
 		components: {
 			feature: (await import('$lib/components/Feature.svelte')).default,
 			grid: (await import('$lib/components/Grid.svelte')).default,
 			page: (await import('$lib/components/Page.svelte')).default,
 			teaser: (await import('$lib/components/Teaser.svelte')).default
 		},
-        // 007 setting some api options like https, cache and region
+		// 007 setting some api options like https, cache and region
 		apiOptions: {
 			https: true,
 			cache: {
@@ -207,5 +207,72 @@ export async function load() {
 }
 ```
 
+## Using the dynamic Storyblok component
 
+The goal is to load the proper components on the page (in the `+page.svelte` file).
 
+Because in the `load()` function of `+page.js` file, we are returning an object with the `story` property, you can access that object it in the `+page.svelte`, exporting a `data` variable. With the `data` object, you can access `data.story`.
+
+In the `script` section, you can export the object (we are going to name it `data,` but you can change the name):
+
+```js
+export let data;
+```
+
+Then in the templating section, you can access that data object (to `data.story`):
+
+```svelte
+<StoryblokComponent blok={data.story.content} />
+```
+
+> See `src/routes/+page.svelte` for more info.
+
+# Creating the components
+
+Because the StoryblokComponent loads the Stroyblok Component, you must create the svelte components for each component used in the page.
+
+For example, in the `home` story, we are using:
+
+- The Page component (as content type)
+- the Teaser component (as a nested component)
+- the Grid component (as a nested component)
+- The Feature component (as a nested component of the Grid component).
+
+The loaded components are listed in the storyblokInit function (in our useStoryblok common function).
+
+The Svelte components are created [in the `src/lib/components` directory](<(src/lib/components)>).
+
+A minimal Svelte component should be:
+
+```svelte
+<script>
+	import { storyblokEditable } from '@storyblok/svelte';
+	export let blok;
+</script>
+
+<div use:storyblokEditable={blok}>
+	{blok.headline}
+</div>
+```
+
+In this example, your component has one field named "headline".
+
+## Activating the Storyblok Bridge
+
+The editable action allows you to interact with Storyblok Bridge (for creating a real-time preview experience in the Storyblok Visual Editor).
+
+To activate the editable field, you have to use the action use:storyblokEditable, and you have to set up the Bridge in the onMount function of your `+page.svelte` file.
+
+```js
+onMount(() => {
+	if (data.story) {
+		useStoryblokBridge(data.story.id, (newStory) => (data.story = newStory));
+	}
+});
+```
+
+for importing the `useStroyblokBridge` :
+
+```js
+import { useStoryblokBridge, StoryblokComponent } from '@storyblok/svelte';
+```

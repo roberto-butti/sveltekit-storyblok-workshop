@@ -1,6 +1,5 @@
 <script>
-	import { storyblokEditable, StoryblokComponent } from '@storyblok/svelte';
-
+	import { storyblokEditable } from '@storyblok/svelte';
 	export let blok;
 </script>
 

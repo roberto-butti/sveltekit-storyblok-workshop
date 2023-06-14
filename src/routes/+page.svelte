@@ -12,7 +12,5 @@
 </script>
 
 <div>
-	{#if data.story}
-		<StoryblokComponent blok={data.story.content} />
-	{/if}
+	<StoryblokComponent blok={data.story.content} />
 </div>
