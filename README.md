@@ -134,3 +134,78 @@ For loading DaisyUI, in the `tailwind.config.js` require the DaisyUI plugin in t
 ```js
 plugins: [require('daisyui')];
 ```
+
+## Installing Storyblok Svelte SDK
+
+```sh
+npm install @storyblok/svelte
+```
+
+## Setup the storyblok instance
+
+Create a JS file to collect all the common functions you can use in your project. For example, I suggest creating the `useStoryblok` function where you can call the `storyblokInit` function from the Storyblok Svelte SDK that allows you to instance the Storyblok objects.
+
+For example you can create `sblib.js` in the `lib/` directory:
+
+```js
+import { apiPlugin, storyblokInit } from '@storyblok/svelte';
+// 001 Import the environment variables
+import { PUBLIC_ACCESS_TOKEN } from '$env/static/public';
+import { PUBLIC_REGION } from '$env/static/public';
+
+export async function useStoryblok(accessToken = '') {
+    // 002 setting the access token (from environment variable)
+	accessToken = accessToken === '' ? PUBLIC_ACCESS_TOKEN : accessToken;
+    // 003 call storyblok init
+	await storyblokInit({
+        // 004 using the access token
+		accessToken: accessToken,
+        // 005 using the apiPlugin (for connecting with Stroyblok API)
+		use: [apiPlugin],
+        // 006 listing the needed components
+		components: {
+			feature: (await import('$lib/components/Feature.svelte')).default,
+			grid: (await import('$lib/components/Grid.svelte')).default,
+			page: (await import('$lib/components/Page.svelte')).default,
+			teaser: (await import('$lib/components/Teaser.svelte')).default
+		},
+        // 007 setting some api options like https, cache and region
+		apiOptions: {
+			https: true,
+			cache: {
+				type: 'memory'
+			},
+			region: PUBLIC_REGION // "us" if your space is in US region
+		}
+	});
+}
+```
+
+## Connecting with Storyblok API
+
+For connecting to the Storyblok API, you can call the useStoryblok function in the SvelteKit `load()` function in the `+page.js` file.
+
+Then you can obtain the response result (the Storyblok Story) and send it to the `+page.svelte` file via the `return`.
+
+```js
+import { useStoryblokApi } from '@storyblok/svelte';
+import { useStoryblok } from '$lib/sblib';
+
+/** @type {import('./$types').PageLoad} */
+export async function load() {
+	await useStoryblok();
+
+	let storyblokApi = await useStoryblokApi();
+
+	const dataStory = await storyblokApi.get('cdn/stories/home', {
+		version: 'draft'
+	});
+
+	return {
+		story: dataStory.data.story
+	};
+}
+```
+
+
+
