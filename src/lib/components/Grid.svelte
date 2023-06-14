@@ -1,5 +1,6 @@
 <script>
 	import { storyblokEditable } from '@storyblok/svelte';
+	import Feature from './Feature.svelte';
 	export let blok;
 </script>
 
@@ -16,11 +17,7 @@
 		<div class="h-32" />
 		<div class="grid gap-10 p-6 xl:grid-cols-3">
 			{#each blok.columns as blokitem}
-				<div class="flex flex-col items-center gap-4">
-					<h3 class="text-[clamp(2rem,6vw,5rem)] font-black tabular-nums">
-						<span>{blokitem.name} </span>
-					</h3>
-				</div>
+				<Feature blok={blokitem} />
 			{/each}
 		</div>
 	</div>
