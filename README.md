@@ -330,3 +330,11 @@ Then create `+page.svelte` file:
 ```
 
 In Storyblok create the story `/about`.
+
+## Build static website (SSG)
+
+INstall the adapter for static pages:
+
+```sh
+npm i -D @sveltejs/adapter-static@latest
+```
