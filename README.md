@@ -357,11 +357,11 @@ import adapter from '@sveltejs/adapter-static';
 And then setup correctly the adapter directive (setting, for example, the destination directory for the built files):
 
 ```js
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: null
-		})
+adapter: adapter({
+	pages: 'build',
+	assets: 'build',
+	fallback: null
+});
 ```
 
 Now you can run `npm run build` for generating static pages.
@@ -372,11 +372,10 @@ Some notes for the checklist to go live:
 
 - If you are going to use Netlify or similar, remember to create a webhook on Netlify and use the Webhook URL in the Storyblok Webhook for publishing and unpublishing stories.
 - Generate a Public token in Storyblok and use that token in Environment variables in Netlify.
-- Use the *published* version instead of the *draft* when you call the Stroyblok API (maybe you can set a specific environment variable for controlling the version)
+- Use the _published_ version instead of the _draft_ when you call the Stroyblok API (maybe you can set a specific environment variable for controlling the version)
 
 ```
 	const dataStory = await storyblokApi.get('cdn/stories/' + slug, {
 		version: 'draft' // or 'published'
 	});
 ```
-
