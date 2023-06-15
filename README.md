@@ -329,12 +329,41 @@ Then create `+page.svelte` file:
 
 ```
 
-In Storyblok create the story `/about`.
+In Storyblok UI, create the story `/about`.
 
-## Build static website (SSG)
+## Build a static website (SSG)
 
-INstall the adapter for static pages:
+Install the adapter for static pages:
 
 ```sh
 npm i -D @sveltejs/adapter-static@latest
 ```
+
+Set in your `+page.js` files or `+layout.js` file the parameter `prerender`:
+
+```js
+export const prerender = true;
+```
+
+This parameter indicates to the process build which pages or set of pages you want to build statically.
+
+In `svelte.config.js` file, you can load the static adapter instead of the auto adapter:
+
+```js
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
+```
+
+And then setup correctly the adapter directive (setting, for example, the destination directory for the built files):
+
+```js
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+			fallback: null
+		})
+```
+
+Now you can run `npm run build` for generating static pages.
+
+If you want to perform a call to Stroyblok API only during the building process, try to rename your `+page.js` files into `+page.server.js` and then rebuild the pages (and take a look at Developer Tools / Network in your browser).
