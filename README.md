@@ -135,6 +135,7 @@ For loading DaisyUI, in the `tailwind.config.js` require the DaisyUI plugin in t
 plugins: [require('daisyui')];
 ```
 
+
 ## Installing Storyblok Svelte SDK
 
 ```sh
