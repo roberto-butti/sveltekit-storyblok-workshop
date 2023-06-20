@@ -19,7 +19,8 @@ export async function useStoryblok(accessToken = '') {
 			feature: (await import('$lib/components/Feature.svelte')).default,
 			grid: (await import('$lib/components/Grid.svelte')).default,
 			page: (await import('$lib/components/Page.svelte')).default,
-			teaser: (await import('$lib/components/Teaser.svelte')).default
+			teaser: (await import('$lib/components/Teaser.svelte')).default,
+			textblok: (await import('$lib/components/Textblok.svelte')).default
 		},
 		// 007 setting some api options like https, cache and region
 		apiOptions: {
