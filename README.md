@@ -1,3 +1,9 @@
+<img
+  src="https://repository-images.githubusercontent.com/653203429/edaf0fdf-23f2-4675-8949-cdfe367c4279"
+  alt="How to integrate Storyblok into your SvelteKit project"
+  title="How to integrate Storyblok into your SvelteKit project"
+  style="display: inline-block; margin: 0 auto; max-width: 400px">
+
 # Sveltekit Storyblok Workshop
 
 This is the repository for tracking all the processes for creating a sample SvelteKit application with Stroyblok.
