@@ -79,7 +79,7 @@ So you can access your application at https://localhost:5173/
 npm install @storyblok/svelte
 ```
 
-Make sure that the `typescript` and the `svelte-preprocess` packages are installed (in devDependencies).
+Make sure that the `typescript` is installed (in devDependencies).
 
 ## Configuring the svelte.config.js file
 
