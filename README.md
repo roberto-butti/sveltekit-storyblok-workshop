@@ -1,20 +1,20 @@
 <img
   src="https://repository-images.githubusercontent.com/653203429/edaf0fdf-23f2-4675-8949-cdfe367c4279"
   alt="How to integrate Storyblok into your SvelteKit project"
-  title="How to integrate Storyblok into your SvelteKit project"
+  title="How to integrate Storyblok into your SvelteKit2 project"
   style="display: inline-block; margin: 0 auto; max-width: 400px">
 
-# Sveltekit Storyblok Workshop
+# Sveltekit 2 Storyblok Workshop
 
-This is the repository for tracking all the processes for creating a sample SvelteKit application with Stroyblok.
+This is the repository for tracking all the processes for creating a sample SvelteKit 2 application with Stroyblok.
 The GitHub repository is here: [sveltekit-storyblok-workshop](https://github.com/roberto-butti/sveltekit-storyblok-workshop)
 
-## Install SvelteKit
+## Install SvelteKit 2
 
-To install SvelteKit you need a JavaScript runtime (Like Node or Bun) and a package manager (like Npm, Pnpm, Yarn or Bun). We are going to use Bun [https://bun.sh/](https://bun.sh/).
+To install SvelteKit 2 you need a JavaScript runtime (Like Node or Bun) and a package manager (like Npm, Pnpm, Yarn or Bun). We are going to use Bun [https://bun.sh/](https://bun.sh/).
 
 ```shell
-# Installing SveteKit base project
+# Installing SveteKit 2 base project
 bun create svelte@latest sveltekit-storyblok-workshop
 # Installing package in the project directory
 cd sveltekit-storyblok-workshop
@@ -106,7 +106,7 @@ Make sure that the `vitePreprocess` function is imported from `vite`, in the `sv
 
 ```js
 // 001 import the vitePreprocess
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 ```
 
 ## Installing TailwindCSS
