@@ -27,10 +27,10 @@ export async function load() {
 	}
 
 	if (space === false) {
-		throw error(404, {
-			message: errorMessage,
-			code: errorCode
-		});
+		error(404, {
+        			message: errorMessage,
+        			code: errorCode
+        		});
 	}
 
 	return {
