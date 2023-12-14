@@ -1,5 +1,5 @@
 <img
-  src="https://repository-images.githubusercontent.com/653203429/edaf0fdf-23f2-4675-8949-cdfe367c4279"
+  src="https://repository-images.githubusercontent.com/653203429/f24a144d-2966-44b7-a447-3fd61abb192d"
   alt="How to integrate Storyblok into your SvelteKit project"
   title="How to integrate Storyblok into your SvelteKit2 project"
   style="display: inline-block; margin: 0 auto; max-width: 400px">
