@@ -30,6 +30,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@storyblok/svelte": "^3.1.6"
+    "@storyblok/svelte": "^4.0.6"
   }
 }
